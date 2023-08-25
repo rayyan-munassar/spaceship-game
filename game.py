@@ -3,8 +3,8 @@ import os
 pygame.font.init()
 pygame.mixer.init()
 
-WIDTH, HIEGHT = 900, 500
-WINDOW = pygame.display.set_mode((WIDTH, HIEGHT))
+WIDTH, HEIGHT = 900, 500
+WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("My Game")
 
 # colors
@@ -24,11 +24,11 @@ MAX_BULLETS = 6
 YELLOW_HIT = pygame.USEREVENT + 1
 RED_HIT = pygame.USEREVENT + 2
 
-# Width and Hieght of Spaceships
-SPACESHIP_WIDTH, SPACESHIP_HIEGHT = 50, 40
+# Width and Height of Spaceships
+SPACESHIP_WIDTH, SPACESHIP_HEIGHT = 50, 40
 
 # Border
-BORDER = pygame.Rect(WIDTH // 2 - 5, 0, 10, HIEGHT)
+BORDER = pygame.Rect(WIDTH // 2 - 5, 0, 10, HEIGHT)
 
 BULLET_HIT_SOUND = pygame.mixer.Sound(os.path.join("Assets", "Grenade+1.mp3"))
 
@@ -45,18 +45,18 @@ YELLOW_SPACESHIP_IMAGE = pygame.image.load("Assets/spaceship_yellow.png")
 
 # Scale and Rotate
 YELLOW_SPACESHIP = pygame.transform.rotate(pygame.transform.scale(
-    YELLOW_SPACESHIP_IMAGE, (SPACESHIP_WIDTH, SPACESHIP_HIEGHT)), 90)
+    YELLOW_SPACESHIP_IMAGE, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT)), 90)
 
 
 RED_SPACESHIP_IMAGE = pygame.image.load(
     os.path.join("Assets", "spaceship_red.png"))
 
 RED_SPACESHIP = pygame.transform.rotate(pygame.transform.scale(
-    RED_SPACESHIP_IMAGE, (SPACESHIP_WIDTH, SPACESHIP_HIEGHT)), 270)
+    RED_SPACESHIP_IMAGE, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT)), 270)
 
 
 SPACE = pygame.transform.scale(pygame.image.load(
-    os.path.join("Assets", "space.png")), (WIDTH, HIEGHT))
+    os.path.join("Assets", "space.png")), (WIDTH, HEIGHT))
 
 
 def draw_window(yellow, red, yellow_bullets, red_bullets, yellow_health, red_health):
@@ -87,7 +87,7 @@ def yellow_handle_movement(keys_pressed, yellow):
     if keys_pressed[pygame.K_a] and yellow.x - VELOCITY > 0:  # LEFT
         yellow.x -= VELOCITY
     # DOWN
-    if keys_pressed[pygame.K_s] and (yellow.y + yellow.width) + VELOCITY < HIEGHT:
+    if keys_pressed[pygame.K_s] and (yellow.y + yellow.width) + VELOCITY < HEIGHT:
         yellow.y += VELOCITY
     # RIGHT
     if keys_pressed[pygame.K_d] and (yellow.x + yellow.width) + VELOCITY - 25 < BORDER.x:
@@ -101,7 +101,7 @@ def red_handle_movement(keys_pressed, red):
     if keys_pressed[pygame.K_LEFT] and red.x - VELOCITY > BORDER.x:
         red.x -= VELOCITY
     # DOWN
-    if keys_pressed[pygame.K_DOWN] and (red.y + red.width) + VELOCITY < HIEGHT:
+    if keys_pressed[pygame.K_DOWN] and (red.y + red.width) + VELOCITY < HEIGHT:
         red.y += VELOCITY
     # RIGHT
     if keys_pressed[pygame.K_RIGHT] and (red.x + red.width) + VELOCITY - 20 < WIDTH:
@@ -131,15 +131,15 @@ def handle_bullets(yellow_bullets, red_bullets, yellow, red):
 def draw_winner(text):
     draw_text = WINNER_FONT.render(text, 1, WHITE)
     WINDOW.blit(draw_text, (WIDTH/2 - draw_text.get_width() /
-                            2, HIEGHT/2 - draw_text.get_height()/2))
+                            2, HEIGHT / 2 - draw_text.get_height()/2))
     pygame.display.update()
     pygame.time.delay(5000)
 
 
 def main():
 
-    yellow = pygame.Rect(300, 100, SPACESHIP_WIDTH, SPACESHIP_HIEGHT)
-    red = pygame.Rect(700, 100, SPACESHIP_WIDTH, SPACESHIP_HIEGHT)
+    yellow = pygame.Rect(300, 100, SPACESHIP_WIDTH, SPACESHIP_HEIGHT)
+    red = pygame.Rect(700, 100, SPACESHIP_WIDTH, SPACESHIP_HEIGHT)
     yellow_bullets = []
     red_bullets = []
 
